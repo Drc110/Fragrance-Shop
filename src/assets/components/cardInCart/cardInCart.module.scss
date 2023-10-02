@@ -1,0 +1,56 @@
+.card{
+    background-color:rgba(239, 236, 231, 1);
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child){
+        margin-bottom: 20px;
+    }
+
+    .imgWrap{
+        height: 130px; //cant scale 
+        width: 130px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 5px;
+        
+        img{
+            width: 100%; // cant scale 
+            height: 100%;
+            object-fit: scale-down;
+        }
+    }
+
+    .textWrap{
+        flex:3;
+        padding: 10px 25px;
+        height: 100%;
+        & > *{
+            margin: 0;
+        }
+        p{
+            font-size: 0.8vw;
+            &:last-of-type{
+                margin-top: 1.5vw;
+            }
+        }
+        h3{
+            font-size: 1.3vw;
+        }
+    }
+
+    .cancelWrap{
+        flex:1;
+        scale: 0.8;
+        cursor: pointer;
+        overflow: hidden;
+
+        opacity: 0.5;
+        transition: opacity 0.1s ease-in-out;
+        &:hover{
+            opacity: 1; //костыль + цвет креста слишком белый
+        }
+    }
+}

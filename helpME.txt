@@ -1,0 +1,47 @@
+!!!!!do smth with fav, use context to page, 
+use react skeleton, use react router somewhere!!!!!!
+
+using context is essential 
+
+fonts.google -> all font sizes -> link to index.html
+
+fix bugs
+
+what to do with liked and in cart sync
+
+in cart multiple postions
+
+card popup react
+
+[
+ {
+  "brand": "Vercase",
+  "title": "Eros",
+  "price": 5500,
+  "imageUrl": "/fr1.webp"
+ },
+ {
+  "brand": "Memo",
+  "title": "Marfa",
+  "price": 19990,
+  "imageUrl": "/fr2.jpg"
+ },
+ {
+  "brand": "Initio",
+  "title": "PSYHODELIC LOVE",
+  "price": 7900,
+  "imageUrl": "/fr3.jpg"
+ },
+ {
+  "brand": "Dior",
+  "title": "Sauvage",
+  "price": 8900,
+  "imageUrl": "/fr4.webp"
+ },
+ {
+  "brand": "Jo Malone",
+  "title": "Elderflower",
+  "price": 11900,
+  "imageUrl": "/fr5.jpg"
+ }
+]
