@@ -1,12 +1,12 @@
 import React from "react";
 import CardItem from "../card/CardItem";
-import styles from "./favorites.module.scss"
+import styles from "./content.module.scss"
 
 import { useMyData } from "../../services";
 
-function Favorites() {
+function Screen() {
     const [searchValue, setSerachValue] = React.useState('')
-    const { favItems, itemsActions } = useMyData()
+    const { items, itemsActions } = useMyData()
 
     const changeSeaarch = (event) =>{
         setSerachValue(event.target.value)
@@ -17,7 +17,7 @@ function Favorites() {
     return (
         <div className={styles.content} >
             <div className={styles.underHeader}>
-                <h2>Мои закладки</h2>
+                <h2>Все ароматы</h2>
                 <div className={styles.searchBlock}>
                     <img src="/lense.svg" alt="" />
                     <input onChange={changeSeaarch} value={searchValue} placeholder='Поиск...' type="text" /> {/* Dопилить крестик */}
@@ -25,7 +25,7 @@ function Favorites() {
             </div>
 
             <div className={styles.fragrCards}>
-                {favItems
+                {items
                     .filter(el => el.title.toLowerCase().includes(searchValue.toLowerCase()) || el.brand.toLowerCase().includes(searchValue.toLowerCase()))
                     .map(el => (
                         <CardItem key={el.title}
@@ -42,4 +42,4 @@ function Favorites() {
     )
 }
 
-export default Favorites
+export default Screen

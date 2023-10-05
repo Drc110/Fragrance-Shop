@@ -1,18 +1,16 @@
-!!!!!do smth with fav, use context to page, 
-use react skeleton, use react router somewhere!!!!!!
-
-using context is essential 
+!!!!! use react skeleton!!!!!!
 
 fonts.google -> all font sizes -> link to index.html
 
 fix bugs
 
-what to do with liked and in cart sync
-
 in cart multiple postions
 
 card popup react
 
+ну смотри слушай, в хедере иконки справа х1.5, свободнее, сердце выровнять
+потом значится контекст в карты прокинуть чтоб функции не получать
+ну и на десерт карточки справа в закладках, чтоб гЭпа не было 
 [
  {
   "brand": "Vercase",

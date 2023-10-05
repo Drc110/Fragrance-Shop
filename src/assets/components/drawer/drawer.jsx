@@ -1,13 +1,13 @@
 import CardInCartItem from "../cardInCart/CardInCartItem"
-import { useContext } from "react"
 import styles from "./drawer.module.scss"
-import { appContext } from "../home/App"
+
+import { useMyData } from "../../services"
 
 
+const Drawer = ({onClickCloseCart}) => {
+    const { cartItems, itemsActions } = useMyData()
 
-const Drawer = ({ onClickCloseCart, onRemove}) => {
-    
-    const {itemsInCart} = useContext(appContext)
+    console.log("draw rerendered")
 
     return (
         <div className={styles.cartEclipse}>
@@ -18,8 +18,11 @@ const Drawer = ({ onClickCloseCart, onRemove}) => {
                 </div>
 
                 <div className={styles.cardInCart}>
-                    {itemsInCart.map(el => (
-                        <CardInCartItem brand={el.brand} title={el.title} price={el.price} imageUrl={el.imageUrl} id = {el.id} onRemove1 = {onRemove}/> //onRemove1???
+                    {cartItems.map(el => (
+                        <CardInCartItem key={el.title}
+                            onRemove = {() => itemsActions.removeCart(el)}
+                            {...el}
+                        />
                     ))}
                 </div>
 
@@ -27,12 +30,12 @@ const Drawer = ({ onClickCloseCart, onRemove}) => {
                     <li>
                         <span>Итого:</span>
                         <div></div>
-                        <b>9400 руб</b>
+                        <b>{itemsActions.countPrice()} руб</b>
                     </li>
                     <li>
                         <span>Ндс 20%</span>
                         <div></div>
-                        <b>1400 руб</b>
+                        <b>{Math.floor(itemsActions.countPrice() * 0.2)} руб</b>
                     </li>
                 </ul>
 
