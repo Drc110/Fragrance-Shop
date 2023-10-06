@@ -17,12 +17,19 @@ const CardInCartItem  = ({
 
         <div className={styles.textWrap}>
             <p>Парфюмерная вода</p>
-            <h3>{brand} {title}</h3> {/* в 2 строки не правильно */}
-            <p>30 мл</p>
-            <h3>{price} руб</h3>
+            <h3>{brand} <br/> {title}</h3>
+            <h4>30 мл</h4>
+            <h2>{price} руб</h2>
         </div>
-
-        <img onClick = {() => onRemove()} className={styles.cancelWrap} src="/close.svg" alt="" />
+        <div className={styles.rightWrap}>
+            <img onClick = {() => onRemove()} className={styles.removeBtn} src="/close.svg" alt="" />
+            <div className={styles.counter}>
+                <img src="/MinusCart.svg" alt="" />
+                <input type="number" min="1" max="99" placeholder='1'/>
+                <img src="/PlusCart.svg" alt="" />
+            </div>
+        </div>
+        
     </div>
     )
 }
