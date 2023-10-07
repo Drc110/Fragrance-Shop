@@ -4,7 +4,7 @@ import styles from "./header.module.scss"
 
 function Header({onClickOpenCart}) {
     const { itemsActions } = useMyData()
-
+    console.log('header render')
     return (
         <header>
             <Link to="/">

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import styles from './card.module.scss'
 import { useMyData } from '../../services'
 
@@ -8,21 +8,41 @@ function CardItem ({
     title,
     price,
     volume,
-    onPlusClick,
-    isAdded,
-    onRemoveCart,
     onLikeClick,
     onRemoveFav,
     isFav
 }) {
+    const [isActive, setActive] = useState(false)
+    const [amount, setAmount] = useState(1)
+    const [selectedValue, setSelectedValue] = useState('0')
 
-    const [isActive, setActive] = React.useState(false)
     const closePopUp = (evt) =>{
         if(evt.target.dataset.txt == "close"){
             setActive(false)
         }
     }
 
+    const handleRadioChange = (evt) => {
+        setSelectedValue(evt.target.value);
+    }
+
+    const changeAmountEvt = (evt) => {
+        if(evt.target.value >= 100){
+            setAmount(99)
+        }else if(evt.target.value < 1){
+            setAmount(1)
+        }else{
+            setAmount(Number(evt.target.value))
+        }
+    }
+
+    const { itemsActions } = useMyData()//50 % init , 50% passing wtf?
+
+    const isAdded = () => itemsActions.isItemAdded(title) 
+    const onPlusClick = () => itemsActions.setItemToCart(title, Number(selectedValue), Number(amount))
+    const onRemoveCart = () => itemsActions.removeCart(title)
+
+    console.log('cart render')
     return (
         <div>
             <div className={styles.card}>
@@ -54,19 +74,23 @@ function CardItem ({
                                 <img className={styles.imgBig} src={imageUrl} alt=""/>
                             </div>
                             <div className={styles.options}>
+                                <img className={styles.closeButton} onClick={closePopUp} data-txt="close" src="/close.svg"/>
                                 <h2>{brand} {title}</h2>
 
-                                {volume.map((el) => (
-                                    <div className={styles.volume}>
-                                        <input type="radio" name="1"/>
-                                        <p>Флакон объемом {el} мл.</p>
+                                {volume.map((el, index) => (
+                                    <div className={styles.flex}>
+                                        <div className={styles.volume}>
+                                            <input type="radio" name={title} checked={selectedValue == index} value={index} onChange={handleRadioChange}/>
+                                            <p>Флакон объемом {el} мл.</p>
+                                        </div>
+                                        <p className={styles.priceRight}>{price[index]} руб/шт.</p>
                                     </div>
                                 ))}
 
                                 <div className={styles.counter}>
-                                    <img src="/MinusCart.svg" alt="" />
-                                    <input type="number" min="1" max="99" placeholder='1'/>
-                                    <img src="/PlusCart.svg" alt="" />
+                                    <img onClick={amount > 1 ? () => setAmount(amount - 1) : null} src="/MinusCart.svg" alt="" />
+                                    <input type="number" min="1" max="99" value={amount} onChange={(evt) => setAmount(evt.target.value)} onBlur={changeAmountEvt}/>
+                                    <img onClick={amount < 99 ? () => setAmount(amount + 1) : null} src="/PlusCart.svg" alt="" />
                                 </div>
                                 <img className={styles.bigCardAdd} onClick={isAdded() ? () => onRemoveCart() : () => onPlusClick()} src={isAdded() ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
                             </div>
@@ -74,7 +98,6 @@ function CardItem ({
                         <div className={styles.descrption}>
 
                         </div>
-                        <button onClick={closePopUp} data-txt="close">123</button>
                     </div>
                 </div>
             ) : (

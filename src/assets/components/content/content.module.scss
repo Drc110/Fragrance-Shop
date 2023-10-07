@@ -6,7 +6,28 @@
         justify-content: space-between;
         margin-bottom: 50px;
         align-items: center;
-
+        .categories{
+            display: flex;
+            ul{
+                list-style-type: none;
+                padding: 0;
+                li{
+                    display: flex;
+                    align-items: center;
+                    height: 40px;
+                    padding: 5px 20px 5px 20px;
+                    background-color: rgba(216, 216, 216, 1);
+                    border-radius: 25px;
+                    margin-right: 20px;
+                    float: left;
+                    font-size: 20px;
+                }
+                .active{
+                    color: white;
+                    background-color: rgb(54, 54, 54);
+                }
+            }
+        }
         .searchBlock{
             display: flex;
             border: 1px solid gray;
@@ -30,6 +51,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        min-height: 550px;
     }
 }
 

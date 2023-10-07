@@ -1,12 +1,12 @@
 import CardInCartItem from "../cardInCart/CardInCartItem"
 import styles from "./drawer.module.scss"
-
+import {useState} from "react"
 import { useMyData } from "../../services"
 
 
 const Drawer = ({onClickCloseCart}) => {
     const { cartItems, itemsActions } = useMyData()
-
+    const [currPrice, changeCurr] = useState(itemsActions.countPrice())
     console.log("draw rerendered")
 
     return (
@@ -20,7 +20,8 @@ const Drawer = ({onClickCloseCart}) => {
                 <div className={styles.cardInCart}>
                     {cartItems.map(el => (
                         <CardInCartItem key={el.title}
-                            onRemove = {() => itemsActions.removeCart(el)}
+                            onRemove = {() => itemsActions.removeCart(el.title)}
+                            onChangeAmount = {(newAmount) => {el.amount = newAmount; changeCurr(itemsActions.countPrice())}} //mama mia!
                             {...el}
                         />
                     ))}
@@ -30,12 +31,12 @@ const Drawer = ({onClickCloseCart}) => {
                     <li>
                         <span>Итого:</span>
                         <div></div>
-                        <b>{itemsActions.countPrice()} руб</b>
+                        <b>{currPrice} руб</b>
                     </li>
                     <li>
                         <span>Ндс 20%</span>
                         <div></div>
-                        <b>{Math.floor(itemsActions.countPrice() * 0.2)} руб</b>
+                        <b>{Math.floor(currPrice * 0.2)} руб</b>
                     </li>
                 </ul>
 

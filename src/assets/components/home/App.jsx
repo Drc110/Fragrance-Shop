@@ -10,7 +10,7 @@ import { MyDataProvider } from '../../services'
 
 function App() {
   const [cartOpened, setCartOpen] = useState(false)
-
+  console.log('app render')
   return (
     <MyDataProvider>
       <div>
