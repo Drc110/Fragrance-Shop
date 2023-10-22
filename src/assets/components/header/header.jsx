@@ -1,19 +1,26 @@
-import { useMyData } from "../../services";
-import { Link } from 'react-router-dom'
 import styles from "./header.module.scss"
+import Drawer from "../drawer/Drawer"
 
-function Header({onClickOpenCart}) {
-    const { itemsActions } = useMyData()
-    console.log('header render')
+import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux"
+import { useState } from 'react'
+
+const Header = () => {
+    const [cartOpened, setCartOpen] = useState(false)
+    const totalPrice = useSelector((state) => state.cart.totalPrice)
+
     return (
         <header>
+
+            {cartOpened && <Drawer onClickCloseCart={() => setCartOpen(false)} totalPrice = {totalPrice} />}
+
             <Link to="/">
                 <h1>Sigma Fragrance</h1>
             </Link>
-
+            
             <div className={styles.headerRight}>
-                <img onClick={onClickOpenCart} src="./cart.svg" alt="cart" /> {/* onClick={onClickopenCart} into one ?div? */}
-                <h3 onClick={onClickOpenCart}> {itemsActions.countPrice()} руб</h3> 
+                <img onClick={() => setCartOpen(true)} src="./cart.svg" alt="cart" />
+                <h3 onClick={() => setCartOpen(true)}> {totalPrice} руб</h3> 
 
                 <Link to="/favorites">
                     <img  src="./heart.svg" alt="liked" />

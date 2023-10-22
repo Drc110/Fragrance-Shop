@@ -1,18 +1,18 @@
-import { useState } from "react";
-import CardItem from "../card/CardItem";
+import CardItem from "../card/CardItem"
 import styles from "./favorites.module.scss"
+
 import { Link } from 'react-router-dom'
-import { useMyData } from "../../services";
+import { useState } from "react"
+import { useSelector } from "react-redux"
 
 function Favorites() {
     const [searchValue, setSerachValue] = useState('')
-    const { favItems, itemsActions } = useMyData()
+
+    const favItems = useSelector((state) => state.fav.favItems)
 
     const changeSeaarch = (event) =>{
         setSerachValue(event.target.value)
     }
-
-    console.log("rerendered fav")
 
     return (
         <div className={styles.content} >
@@ -30,17 +30,11 @@ function Favorites() {
                         .filter(el => el.title.toLowerCase().includes(searchValue.toLowerCase()) || el.brand.toLowerCase().includes(searchValue.toLowerCase()))
                         .map(el => (
                             <CardItem key={el.title}
-                                isAdded={() => itemsActions.isItemAdded(el)}
-                                onPlusClick={() => itemsActions.setItemToCart(el)}
-                                onRemoveCart={() => itemsActions.removeCart(el)}
-                                onLikeClick={() => itemsActions.setItemToFav(el)}
-                                onRemoveFav={() => itemsActions.removeFav(el)}
-                                isFav={() => itemsActions.isItemFav(el)}
                                 {...el}
                             />))}
                 </div>) : (
                 <div className={styles.placeHolder}>
-                    <img classNmae={styles.purH} src="/purpleHearth.svg" alt="" />
+                    <img className={styles.purH} src="/purpleHearth.svg" alt="" />
                     <h2>В избранном пока пусто</h2>
                     <h4>Сохраняйте товары, которые понравились, чтобы долго не искать</h4>
                     <Link to="/">

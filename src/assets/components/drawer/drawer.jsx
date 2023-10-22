@@ -1,13 +1,10 @@
 import CardInCartItem from "../cardInCart/CardInCartItem"
 import styles from "./drawer.module.scss"
-import {useState} from "react"
-import { useMyData } from "../../services"
 
+import { useSelector } from "react-redux"
 
-const Drawer = ({onClickCloseCart}) => {
-    const { cartItems, itemsActions } = useMyData()
-    const [currPrice, changeCurr] = useState(itemsActions.countPrice())
-    console.log("draw rerendered")
+const Drawer = ({onClickCloseCart, totalPrice}) => {
+    const cartItems = useSelector((state) => state.cart.cartItems)
 
     return (
         <div className={styles.cartEclipse}>
@@ -17,30 +14,37 @@ const Drawer = ({onClickCloseCart}) => {
                     <img onClick={onClickCloseCart} src="/close.svg" alt="" />
                 </div>
 
-                <div className={styles.cardInCart}>
-                    {cartItems.map(el => (
-                        <CardInCartItem key={el.title}
-                            onRemove = {() => itemsActions.removeCart(el.title)}
-                            onChangeAmount = {(newAmount) => {el.amount = newAmount; changeCurr(itemsActions.countPrice())}} //mama mia!
-                            {...el}
-                        />
-                    ))}
+                {cartItems.length ? (
+                <div className={styles.content}>
+                    <div className={styles.cardInCart}>
+                        {cartItems.map(el => (
+                            <CardInCartItem key={el.title}
+                                {...el}
+                            />
+                        ))}
+                    </div>
+                    <ul>
+                        <li>
+                            <span>Итого:</span>
+                            <div></div>
+                            <b>{totalPrice} руб</b>
+                        </li>
+                        <li>
+                            <span>Ндс 20%</span>
+                            <div></div>
+                            <b>{Math.floor(totalPrice * 0.2)} руб</b>
+                        </li>
+                    </ul>
+                    <button className={styles.bottomBtn}>Оформить заказ</button>
                 </div>
-
-                <ul>
-                    <li>
-                        <span>Итого:</span>
-                        <div></div>
-                        <b>{currPrice} руб</b>
-                    </li>
-                    <li>
-                        <span>Ндс 20%</span>
-                        <div></div>
-                        <b>{Math.floor(currPrice * 0.2)} руб</b>
-                    </li>
-                </ul>
-
-                <button>Оформить заказ</button>
+                
+                ) : (
+                    <div className={styles.emptyCart}>
+                        <h2>Корзина пуста</h2>
+                        <h4>Похоже вы ничего не добавили, вкрнуться в каталог?</h4>
+                        <button onClick={onClickCloseCart}>Каталог</button>
+                    </div>
+                )}
             </div>
         </div>
     )

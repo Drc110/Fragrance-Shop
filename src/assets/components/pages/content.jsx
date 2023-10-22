@@ -1,20 +1,18 @@
-import { useState } from "react";
-import CardItem from "../card/CardItem";
 import styles from "./content.module.scss"
+import CardItem from "../card/CardItem"
+import { useSelector } from "react-redux"
+import { useState} from "react"
 
-import { useMyData } from "../../services";
-
-function Screen() {
+function Content() {
     const categories = ['Все ароматы', 'Мужские', 'Женские', 'Унисекс']
     const [searchValue, setSerachValue] = useState('')
     const [activeIndex, setActiveIndex] = useState(0)
-
-    const { items, itemsActions } = useMyData()
+    const items = useSelector((state) => state.items.items)
     
     const changeSeaarch = (event) =>{
         setSerachValue(event.target.value)
     }
-    console.log('content render')
+
     return (
         <div className={styles.content} >
             <div className={styles.underHeader}>
@@ -37,16 +35,13 @@ function Screen() {
                 {items
                     .filter(el => (el.title.toLowerCase().includes(searchValue.toLowerCase()) || el.brand.toLowerCase().includes(searchValue.toLowerCase()))
                      && (activeIndex == 0 ? el.gender : el.gender == activeIndex))
-                    .map(el => (
-                        <CardItem key={el.title}
-                            onLikeClick={() => itemsActions.setItemToFav(el)}
-                            onRemoveFav={() => itemsActions.removeFav(el)}
-                            isFav={() => itemsActions.isItemFav(el)}
+                    .map(el => (<CardItem key={el.title}
                             {...el}
-                        />))}
+                    />))
+                }
             </div>
-        </div >
+        </div>
     )
 }
 
-export default Screen
+export default Content

@@ -122,7 +122,7 @@ export function MyDataProvider({ children }) {
     countPrice: () => {
       return cartItems.reduce((sum, obj) => (obj.price * obj.amount) + sum, 0)
     }
-  } 
+  }
 
   return (
     <MyDataContext.Provider value={{ items, cartItems, favItems, itemsActions}}>

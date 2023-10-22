@@ -1,28 +1,41 @@
 import styles from './cardInCart.module.scss'
-import { useState } from 'react'
 
-const CardInCartItem  = ({
+import { useState } from 'react'
+import { useDispatch } from "react-redux"
+import { removeFromCart, setAmount } from '../../services/slices/cartSlice'
+
+const CardInCartItem = ({
     imageUrl,
     brand,
     title,
     price,
     amount,
-    volume,
-    onRemove,
-    onChangeAmount
+    volume
 }) => {
-    const [amountCart, setAmount] = useState(Number(amount)) //enter 0 in input and press close :| also can be float :O
+    const [newAmount, setNewAmount] = useState(amount)
+    const dispatch = useDispatch()
 
-    const changeAmountEvt = (evt) => {
+    const changeAmountEvt = (evt) => { //double check cut smt
         if(evt.target.value >= 100){
-            setAmount(99)
+            setNewAmount(99)
         }else if(evt.target.value < 1){
-            setAmount(1)
+            setNewAmount(1)
         }else{
-            setAmount(Number(evt.target.value))
+            setNewAmount(Math.floor(Number(evt.target.value)))
         }
+        dispatch(setAmount({title: title, amount: Math.floor(newAmount)}))
     }
-    console.log('cart in cart render')
+
+    const deleteOne = () => {
+        setNewAmount(newAmount - 1)
+        dispatch(setAmount({title: title, amount: newAmount - 1}))
+    }
+
+    const addOne = () => {
+        setNewAmount(newAmount + 1)
+        dispatch(setAmount({title: title, amount: newAmount + 1}))
+    }
+
     return(
     <div className={styles.card}>
 
@@ -34,14 +47,14 @@ const CardInCartItem  = ({
             <p>Парфюмерная вода</p>
             <h3>{brand} <br/> {title}</h3>
             <h4>{volume} мл.</h4>
-            <h2>{price * amountCart} руб</h2>
+            <h2>{price * amount} руб</h2>
         </div>
         <div className={styles.rightWrap}>
-            <img onClick = {() => {onRemove(); onChangeAmount(0)}} className={styles.removeBtn} src="/close.svg" alt="" />
+            <img onClick = {() => dispatch(removeFromCart(title))} className={styles.removeBtn} src="/close.svg" alt="" />
             <div className={styles.counter}>
-                <img onClick={amountCart > 1 ? () => {setAmount(amountCart - 1); onChangeAmount(amountCart - 1)} : null} src="/MinusCart.svg" alt="" />
-                <input type="number" min="1" max="99" value={amountCart} onChange={(evt) => {setAmount(Number(evt.target.value)); onChangeAmount(evt.target.value)}} onBlur={changeAmountEvt}/>
-                <img onClick={amountCart < 99 ? () => {setAmount(amountCart + 1); onChangeAmount(amountCart + 1)} : null} src="/PlusCart.svg" alt="" />
+                <img onClick={newAmount > 1 ? deleteOne : null} src="/MinusCart.svg" alt="" />
+                <input type="number" min="1" max="99" value={newAmount} onChange={(evt) => {setNewAmount(evt.target.value)}} onBlur={changeAmountEvt}/>
+                <img onClick={newAmount < 99 ? addOne : null} src="/PlusCart.svg" alt="" />
             </div>
         </div>
         

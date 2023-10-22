@@ -1,21 +1,28 @@
-import { useState } from 'react'
 import styles from './card.module.scss'
-import { useMyData } from '../../services'
 
-function CardItem ({
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { addToCart, removeFromCart } from '../../services/slices/cartSlice'
+import { addToFav, removeFromFav } from '../../services/slices/favSlice'
+
+const CardItem = ({
     imageUrl,
     brand,
     title,
     price,
-    volume,
-    onLikeClick,
-    onRemoveFav,
-    isFav
-}) {
+    volume
+}) => {
     const [isActive, setActive] = useState(false)
-    const [amount, setAmount] = useState(1)
+
+    const dispatch = useDispatch()
+    const isItemInCart = useSelector((state) => state.cart.cartItems.some((obj) => obj.title == title)) 
+    const isItemFav = useSelector((state) => state.fav.favItems.some((obj) => obj.title == title))
+
+    const [amount, setAmount] = useState(1) //mod in prod version ==> isItemInCart ? isItemInCart.amount : 1
     const [selectedValue, setSelectedValue] = useState('0')
 
+    //useEffect(() => {isItemInCart && setAmount(isItemInCart.amount)}) //sync with cart in one way (cart ==> content)
+    
     const closePopUp = (evt) =>{
         if(evt.target.dataset.txt == "close"){
             setActive(false)
@@ -32,24 +39,40 @@ function CardItem ({
         }else if(evt.target.value < 1){
             setAmount(1)
         }else{
-            setAmount(Number(evt.target.value))
+            setAmount(Math.floor(Number(evt.target.value)))
         }
     }
 
-    const { itemsActions } = useMyData()//50 % init , 50% passing wtf?
+    const onClickAdd = () => {
+        const item = {
+            imageUrl,
+            brand,
+            title,
+            price: price[selectedValue],
+            volume: volume[selectedValue],
+            amount: amount
+        }
+        dispatch(addToCart(item))
+    }
 
-    const isAdded = () => itemsActions.isItemAdded(title) 
-    const onPlusClick = () => itemsActions.setItemToCart(title, Number(selectedValue), Number(amount))
-    const onRemoveCart = () => itemsActions.removeCart(title)
+    const onClickLike = () => {
+        const item = {
+            imageUrl,
+            brand,
+            title,
+            price,
+            volume
+        }
+        dispatch(addToFav(item))
+    }
 
-    console.log('cart render')
     return (
         <div>
             <div className={styles.card}>
 
                 <div className={styles.imgWrap}>
-                    <img className={styles.likeButton} onClick={isFav() ? () => onRemoveFav() : () => onLikeClick()} src={isFav() ? "/hearthRed.svg" : "/hearthGray.svg"} alt="" />
-                    <img src={imageUrl} alt="" onClick={() => setActive(true)}/>
+                    <img className={styles.likeButton} onClick={isItemFav ? () => dispatch(removeFromFav(title)) : onClickLike} src={isItemFav ? "/hearthRed.svg" : "/hearthGray.svg"} alt="" />
+                    <img src={imageUrl} loading="lazy" alt="" onClick={() => setActive(true)}/>
                 </div>
 
                 <div className={styles.textWrap} onClick={() => setActive(true)}>
@@ -62,11 +85,11 @@ function CardItem ({
                         <p>Парфюмерная вода</p>
                         <h3>От {price[0]} руб</h3>
                     </div>
-                    <img className={styles.cardBotRight} onClick={isAdded() ? () => onRemoveCart() : () => setActive(true)} src={isAdded() ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
+                    <img className={styles.cardBotRight} onClick={isItemInCart ? () => dispatch(removeFromCart(title)) : () => setActive(true)} src={isItemInCart ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
                 </div>
 
             </div>
-            {isActive ? (
+            {isActive && (
                 <div className={styles.backIfActive} onClick={closePopUp} data-txt="close">
                     <div className={styles.bigWrapper}>
                         <div className={styles.mainWrap}>
@@ -78,12 +101,12 @@ function CardItem ({
                                 <h2>{brand} {title}</h2>
 
                                 {volume.map((el, index) => (
-                                    <div className={styles.flex}>
+                                    <div className={styles.flex} key = {index}>
                                         <div className={styles.volume}>
                                             <input type="radio" name={title} checked={selectedValue == index} value={index} onChange={handleRadioChange}/>
                                             <p>Флакон объемом {el} мл.</p>
                                         </div>
-                                        <p className={styles.priceRight}>{price[index]} руб/шт.</p>
+                                        <p className={styles.priceRight}>{price[index]} руб/шт.</p> {/* there supposed to be pair of volume/price */}
                                     </div>
                                 ))}
 
@@ -92,7 +115,7 @@ function CardItem ({
                                     <input type="number" min="1" max="99" value={amount} onChange={(evt) => setAmount(evt.target.value)} onBlur={changeAmountEvt}/>
                                     <img onClick={amount < 99 ? () => setAmount(amount + 1) : null} src="/PlusCart.svg" alt="" />
                                 </div>
-                                <img className={styles.bigCardAdd} onClick={isAdded() ? () => onRemoveCart() : () => onPlusClick()} src={isAdded() ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
+                                <img className={styles.bigCardAdd} onClick={isItemInCart ? () => dispatch(removeFromCart(title)) : onClickAdd} src={isItemInCart ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
                             </div>
                         </div>
                         <div className={styles.descrption}>
@@ -100,8 +123,6 @@ function CardItem ({
                         </div>
                     </div>
                 </div>
-            ) : (
-                null
             )}
             
         </div>
