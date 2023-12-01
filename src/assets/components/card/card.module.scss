@@ -32,6 +32,7 @@
             width: 100%;
             height: 100%;
             object-fit: scale-down;
+            -webkit-user-drag: none;
         }
     }
     
@@ -41,10 +42,10 @@
         
         h3{
             width: 100%;
-            height: 20px;
+            height: 25px;
             font-size: 20px;
             text-align: center;
-            line-height: 180%; //overflow
+            line-height: 180%;
             margin: 0;
         }
     }
@@ -151,6 +152,7 @@
                     background-color: rgba(216, 216, 216, 1);
                     align-items: center;
                     img{
+                        -webkit-user-drag: none;
                         scale: 0.8;
                         height: 100%;
                         width: 33%;
@@ -174,6 +176,7 @@
                     }
                 }
                 .bigCardAdd{
+                    -webkit-user-drag: none;
                     position: absolute;
                     bottom: 16px;
                     right: 45px;

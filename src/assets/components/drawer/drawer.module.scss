@@ -4,13 +4,13 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.45);
     z-index: 1;
 }
 
 .cartMenu{
     position: fixed;
-    height: calc(100vh - 60px); //kosti'l
+    height: calc(100vh - 60px);
     width: 30%;
     right: 0;
     background-color: rgb(255, 251, 246);
@@ -26,15 +26,19 @@
             font-size: 35px;
             align-self: flex-end;
         }
+        img{
+            -webkit-user-drag: none;
+            cursor: pointer;
+        }
     }
     
-    .content{ // добавь много карт, уберай по одной кнопка шатается
-        height: calc(100vh - 110px);
+    .content{
+        height: calc(100vh - 120px);
         display: flex;
         flex-direction: column;
         .cardInCart{
             flex:1;
-            overflow-y: auto; //стилизовать
+            overflow-y: auto; //стилизовать 
         }
 
         ul{

@@ -15,7 +15,7 @@ const CardInCartItem = ({
     const [newAmount, setNewAmount] = useState(amount)
     const dispatch = useDispatch()
 
-    const changeAmountEvt = (evt) => { //double check cut smt
+    const changeAmountEvt = (evt) => { //thunkAPI redux !!!onChange regex <=2 symbols
         if(evt.target.value >= 100){
             setNewAmount(99)
         }else if(evt.target.value < 1){

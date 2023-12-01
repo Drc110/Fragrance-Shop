@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    totalPrice: 0,
-    cartItems: []
+  totalPrice: 0,
+  cartItems: []
 }
 
 export const cartSlice = createSlice({
@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
     },
     removeFromCart(state, action) {
       state.cartItems = state.cartItems.filter((obj) => obj.title != action.payload)
-      state.totalPrice = state.cartItems.reduce((sum, obj) => (obj.price * obj.amount) + sum, 0) //re render whole header not only total
+      state.totalPrice = state.cartItems.reduce((sum, obj) => (obj.price * obj.amount) + sum, 0)
     },
     setAmount(state, action) {
       const findItem = state.cartItems.find((obj) => obj.title == action.payload.title)
@@ -31,6 +31,6 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addToCart,  removeFromCart, addOneMore, deleteOne, setAmount } = cartSlice.actions
+export const { addToCart, removeFromCart, setAmount } = cartSlice.actions
 
 export default cartSlice.reducer

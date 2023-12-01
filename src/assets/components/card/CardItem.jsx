@@ -1,5 +1,4 @@
 import styles from './card.module.scss'
-
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { addToCart, removeFromCart } from '../../services/slices/cartSlice'
@@ -13,13 +12,11 @@ const CardItem = ({
     volume
 }) => {
     const [isActive, setActive] = useState(false)
-
-    const dispatch = useDispatch()
+    const [amount, setAmount] = useState(1) //mod in final version ==> isItemInCart ? isItemInCart.amount : 1
+    const [selectedValue, setSelectedValue] = useState('0')
     const isItemInCart = useSelector((state) => state.cart.cartItems.some((obj) => obj.title == title)) 
     const isItemFav = useSelector((state) => state.fav.favItems.some((obj) => obj.title == title))
-
-    const [amount, setAmount] = useState(1) //mod in prod version ==> isItemInCart ? isItemInCart.amount : 1
-    const [selectedValue, setSelectedValue] = useState('0')
+    const dispatch = useDispatch()
 
     //useEffect(() => {isItemInCart && setAmount(isItemInCart.amount)}) //sync with cart in one way (cart ==> content)
     
@@ -124,7 +121,7 @@ const CardItem = ({
                     </div>
                 </div>
             )}
-            
+
         </div>
     )
 }

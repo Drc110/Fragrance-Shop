@@ -47,6 +47,7 @@
         height: 130px;
         position: relative;
         .removeBtn{
+            -webkit-user-drag: none;
             top: 0;
             right: 5px;
             position: absolute;
@@ -70,6 +71,7 @@
             background-color: rgba(216, 216, 216, 1);
             align-items: center;
             img{
+                -webkit-user-drag: none;
                 scale: 0.8;
                 height: 100%;
                 width: 33%;

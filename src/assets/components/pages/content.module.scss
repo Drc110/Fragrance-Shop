@@ -1,5 +1,5 @@
 .content{
-    padding: 30px;
+    padding: 30px 30px 0 30px;
 
     .underHeader{
         display: flex;
@@ -48,10 +48,16 @@
     }
 
     .fragrCards{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        min-height: 550px;
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20% 20%;
+        grid-template-rows: min-content;
+        justify-items: center;
+        min-height: 600px;
+    }
+
+    .observer{
+        width: 100%;
+        height: 100px;
     }
 }
 
