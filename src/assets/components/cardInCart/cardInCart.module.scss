@@ -27,16 +27,19 @@
         flex: 1;
         height: 130px;
         padding-left: 20px;
-
         white-space: nowrap;
         overflow: hidden;
         display: grid;
         
         & > *{
             margin: 0;
+            font-family: 'Inter';
+        }
+        p:last-of-type{
+            font-weight: 600;
         }
         :last-child{
-            font-size: 27px;
+            font-size: 22px;
             align-self: flex-end;
         }
     }
@@ -92,6 +95,7 @@
                 font-size: 23px;
                 background-color: rgba(216, 216, 216, 1);
                 outline: 0;
+                font-family: 'Inter';
             }
         }
     }

@@ -41,7 +41,7 @@ const Drawer = ({onClickCloseCart, totalPrice}) => {
                 ) : (
                     <div className={styles.emptyCart}>
                         <h2>Корзина пуста</h2>
-                        <h4>Похоже вы ничего не добавили, вкрнуться в каталог?</h4>
+                        <p>Похоже вы ничего не добавили, вкрнуться в каталог?</p>
                         <button onClick={onClickCloseCart}>Каталог</button>
                     </div>
                 )}

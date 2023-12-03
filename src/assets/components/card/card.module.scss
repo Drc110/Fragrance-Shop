@@ -45,8 +45,9 @@
             height: 25px;
             font-size: 20px;
             text-align: center;
-            line-height: 180%;
+            line-height: 150%;
             margin: 0;
+            font-family: 'Inter';
         }
     }
 
@@ -58,12 +59,16 @@
         .cardBotLeft{
             flex: 3;
             p{
+                font-family: 'Oswald';
+                font-weight: 400;
                 line-height: 33px;
-                font-size: 14px;
+                font-size: 15px;
                 margin: 0;  
             }
             h3{
                 margin: 0;
+                font-family: 'Inter';
+                font-weight: 600;
             }
         }
         .cardBotRight{
@@ -115,29 +120,43 @@
             }
             .options{
                 flex: 3;
-                position: relative; //core
+                position: relative;
                 padding-left: 20px;
                 height: 100%;
-                .closeButton{
-                    position: absolute;
-                    right: 0;
+                .optionsTop{
+                    margin: 0;
+                    display: flex;
+                    height: 50px;
+                    h2{
+                        font-family: 'Inter';
+                        margin: 0;
+                        width: 85%;
+                        align-self: center;
+                    }
+                    .closeButton{
+                        position: absolute;
+                        right: 5px;
+                        top: 5px;
+                        scale: 1.4;
+                    }  
                 }
                 .flex{
                     display: flex;
-                    
+                    margin-top: 20px;
                     .volume{
                         display: flex;
                         border-bottom: 1px solid #000;
-                        width: 70%;
-                        margin-bottom: 30px;
-                        
+                        width: 60%;
+                        margin: 0 20px 30px 0;
                         & > *{
                             margin-right: 10px;
+                            font-family: 'Inter';
                         }
                     }
                     .priceRight{
-                        position:absolute;
-                        right: 5%;
+                        font-family: 'Inter';
+                        font-weight: 600;
+                        line-height: 150%;
                     }
                 }
                 

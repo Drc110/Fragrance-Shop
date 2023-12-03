@@ -17,7 +17,7 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((obj) => obj.title != action.payload)
       state.totalPrice = state.cartItems.reduce((sum, obj) => (obj.price * obj.amount) + sum, 0)
     },
-    setAmount(state, action) {
+    setAmountInCart(state, action) {
       const findItem = state.cartItems.find((obj) => obj.title == action.payload.title)
       if(action.payload.amount >= 100){
         findItem.amount = 99
@@ -31,6 +31,6 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, removeFromCart, setAmount } = cartSlice.actions
+export const { addToCart, removeFromCart, setAmountInCart } = cartSlice.actions
 
 export default cartSlice.reducer

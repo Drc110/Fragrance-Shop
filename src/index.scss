@@ -1,9 +1,7 @@
 $main-purple: rgb(103, 61, 171);
 
-//INTER
-
 body{
-    background-color: $main-purple;
+    background-image: linear-gradient(to right, $main-purple, rgb(212, 133, 223));
     margin: 0;
 }
 
@@ -13,4 +11,8 @@ body{
     border-radius: 20px;
     //box-shadow: ;
     margin: 2em auto;
+}
+.placeHolder{
+    padding-top: 50px;
+    height: 650px;
 }

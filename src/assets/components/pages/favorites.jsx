@@ -23,9 +23,9 @@ function Favorites() {
                 <div className={styles.placeHolder}>
                     <img className={styles.purH} src="/purpleHearth.svg" alt="" />
                     <h2>В избранном пока пусто</h2>
-                    <h4>Сохраняйте товары, которые понравились, чтобы долго не искать</h4>
+                    <p>Сохраняйте товары, которые понравились, чтобы долго не искать</p>
                     <Link to="/">
-                        <button>перейти на главную</button>
+                        <button>Перейти к каталогу</button>
                     </Link>
                 </div>
             )}

@@ -6,7 +6,9 @@
         justify-content: space-between;
         margin-bottom: 50px;
         align-items: center;
-
+        h2{
+            font-family: 'Inter';
+        }
         .searchBlock{
             display: flex;
             border: 1px solid gray;
@@ -44,7 +46,13 @@
             scale: 2;
         }
         h2{
+            font-family: 'Inter';
+            font-size: 30px;
             margin-top: 50px;
+        }
+        p{
+            font-family: 'Inter';
+            font-size: 18px
         }
         button{
             width: 250px;

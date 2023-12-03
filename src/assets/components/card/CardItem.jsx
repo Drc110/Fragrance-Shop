@@ -94,16 +94,18 @@ const CardItem = ({
                                 <img className={styles.imgBig} src={imageUrl} alt=""/>
                             </div>
                             <div className={styles.options}>
-                                <img className={styles.closeButton} onClick={closePopUp} data-txt="close" src="/close.svg"/>
-                                <h2>{brand} {title}</h2>
-
+                                <div className={styles.optionsTop}>
+                                    <h2>{brand} {title}</h2>
+                                    <img className={styles.closeButton} onClick={closePopUp} data-txt="close" src="/close.svg"/>
+                                </div>
+                                
                                 {volume.map((el, index) => (
                                     <div className={styles.flex} key = {index}>
                                         <div className={styles.volume}>
                                             <input type="radio" name={title} checked={selectedValue == index} value={index} onChange={handleRadioChange}/>
                                             <p>Флакон объемом {el} мл.</p>
                                         </div>
-                                        <p className={styles.priceRight}>{price[index]} руб/шт.</p> {/* there supposed to be pair of volume/price */}
+                                        <p className={styles.priceRight}>{price[index]} руб/шт.</p>
                                     </div>
                                 ))}
 

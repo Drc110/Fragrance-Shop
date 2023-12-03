@@ -22,10 +22,10 @@ const Header = () => {
                 <h3 onClick={() => setCartOpen(true)}> {totalPrice} руб</h3> 
 
                 <Link to="/favorites">
-                    <img  src="./heart.svg" alt="liked" />
+                    <img width={21} src="./heart.svg" alt="liked" />
                 </Link>
                 
-                <img src="./profile.svg" alt="profile" />
+                <img width={20} src="./profile.svg" alt="profile" />
             </div>
         </header>
     )

@@ -1,8 +1,7 @@
 import styles from './cardInCart.module.scss'
-
 import { useState } from 'react'
 import { useDispatch } from "react-redux"
-import { removeFromCart, setAmount } from '../../services/slices/cartSlice'
+import { removeFromCart, setAmountInCart } from '../../services/slices/cartSlice'
 
 const CardInCartItem = ({
     imageUrl,
@@ -23,17 +22,17 @@ const CardInCartItem = ({
         }else{
             setNewAmount(Math.floor(Number(evt.target.value)))
         }
-        dispatch(setAmount({title: title, amount: Math.floor(newAmount)}))
+        dispatch(setAmountInCart({title: title, amount: Math.floor(newAmount)}))
     }
 
     const deleteOne = () => {
         setNewAmount(newAmount - 1)
-        dispatch(setAmount({title: title, amount: newAmount - 1}))
+        dispatch(setAmountInCart({title: title, amount: newAmount - 1}))
     }
 
     const addOne = () => {
         setNewAmount(newAmount + 1)
-        dispatch(setAmount({title: title, amount: newAmount + 1}))
+        dispatch(setAmountInCart({title: title, amount: newAmount + 1}))
     }
 
     return(
@@ -46,8 +45,8 @@ const CardInCartItem = ({
         <div className={styles.textWrap}>
             <p>Парфюмерная вода</p>
             <h3>{brand} <br/> {title}</h3>
-            <h4>{volume} мл.</h4>
-            <h2>{price * amount} руб</h2>
+            <p>{volume} мл.</p>
+            <h3>{price * amount} руб</h3>
         </div>
         <div className={styles.rightWrap}>
             <img onClick = {() => dispatch(removeFromCart(title))} className={styles.removeBtn} src="/close.svg" alt="" />

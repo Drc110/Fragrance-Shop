@@ -9,11 +9,14 @@ export const itemSlice = createSlice({
   initialState,
   reducers: {
     setItems(state, action) {
+      state.items = action.payload
+    },
+    updateItems(state, action) {
       state.items.push(...action.payload)
     },
   },
 })
 
-export const { setItems } = itemSlice.actions
+export const { setItems, updateItems } = itemSlice.actions
 
 export default itemSlice.reducer
