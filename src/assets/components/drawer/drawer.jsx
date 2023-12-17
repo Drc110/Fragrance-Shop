@@ -1,6 +1,6 @@
 import CardInCartItem from "../cardInCart/CardInCartItem"
 import styles from "./drawer.module.scss"
-
+import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const Drawer = ({onClickCloseCart, totalPrice}) => {
@@ -35,7 +35,9 @@ const Drawer = ({onClickCloseCart, totalPrice}) => {
                             <b>{Math.floor(totalPrice * 0.2)} руб</b>
                         </li>
                     </ul>
-                    <button className={styles.bottomBtn}>Оформить заказ</button>
+                    <Link to="/user">
+                        <button onClick={onClickCloseCart} className={styles.bottomBtn}>Оформить заказ</button>
+                    </Link>
                 </div>
                 
                 ) : (

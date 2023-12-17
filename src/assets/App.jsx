@@ -1,11 +1,12 @@
-import Header from '../header/header'
-import Content from './content'
+import Header from './components/header/Header'
+import Content from './components/pages/Content'
 import { Route, Routes } from 'react-router-dom'
-import { store } from '../../services/store.js'
+import { store } from './services/store.js'
 import { Provider } from 'react-redux'
 import { lazy, Suspense } from 'react'
 
-const Favorites = lazy(() => import('./favorites'))
+const Favorites = lazy(() => import('./components/pages/Favorites'))
+const UserPage = lazy(() => import('./components/pages/UserPage'))
 
 function App() {
   return (
@@ -23,6 +24,12 @@ function App() {
               <Favorites />
             </Suspense>
           }/>
+
+          <Route path="/user" element={
+            <Suspense fallback={<div className="placeHolder">loading...</div>}>
+              <UserPage />
+            </Suspense>
+          } />
         </Routes>
 
       </div>

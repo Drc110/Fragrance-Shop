@@ -1,0 +1,12 @@
+#+ и - подрезать в кол-во карт, prevent default
+вообще выпили input пж
+
+gzip
+
+thunkAPI
+
+CardInCartItem comments check
+
+пагинацию не остановить....... мы умрем....
+
+поиск глобальный

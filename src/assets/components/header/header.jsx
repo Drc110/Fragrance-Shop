@@ -25,7 +25,9 @@ const Header = () => {
                     <img width={21} src="./heart.svg" alt="liked" />
                 </Link>
                 
-                <img width={20} src="./profile.svg" alt="profile" />
+                <Link to="/user">
+                    <img width={20} src="./profile.svg" alt="profile" />
+                </Link>
             </div>
         </header>
     )

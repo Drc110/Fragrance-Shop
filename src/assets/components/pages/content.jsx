@@ -16,7 +16,7 @@ function Content() {
     const dispatch = useDispatch()
 
     async function fetchPageOfItems(pageNum, gender = '') {
-        return await axios.get(`https://6509cc03f6553137159c07d1.mockapi.io/items?page=${pageNum}&limit=10&gender=${gender}`).then((response) => response.data);
+        return await axios.get(`https://6509cc03f6553137159c07d1.mockapi.io/items?page=${pageNum}&limit=10&gender=${gender}`).then((response) => response.data)
     }
 
     const {ref, inView} = useInView({
@@ -67,7 +67,7 @@ function Content() {
                 {items
                     .filter(el => (el.title.toLowerCase().includes(searchValue.toLowerCase()) || el.brand.toLowerCase().includes(searchValue.toLowerCase()))) //sorting only loaded
                     .map(el => (<CardItem key={el.title}
-                            {...el}
+                        {...el}
                     />))
                 }
             </div>

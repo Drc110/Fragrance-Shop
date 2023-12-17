@@ -1,21 +1,9 @@
 .content{
     padding: 30px;
-
     h2{
         font-family: 'Inter';
-        margin-bottom: 50px;
+        margin-bottom: 25px;
     }
-
-    .fragrCards{
-        display: grid;
-        grid-template-columns: 20% 20% 20% 20% 20%;
-        justify-items: center;
-        min-height: 550px;
-        &>*{
-            margin-right: 0;
-        }
-    }
-
     .placeHolder{
         padding-top: 50px;
         height: 500px;

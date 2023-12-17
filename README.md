@@ -1,8 +1,19 @@
-# React + Vite
+# Fragrance-shop
+Этот проект представляет собой интернет-магазин парфюмерии. Он создан для изучения и практики основных технологий веб-разработки.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Основные технологии:
+SCSS: Использование препроцессора для более эффективной и поддерживаемой стилизации, раскрыт не весь функционал, но познал модальность.
+React: База.
+Redux: Реализация управления состояниями.
+React Router: Навигация по страницам приложения.
+Axios: Взаимодействие с внешними API для получения данных.
+React Intersection Observer: Использование библиотеки для подгрузки духови вечного скролла.
+MockAPI: Имитация бекенда для разработки без реального сервера.
+# Планы по улучшению:
+Планируется перевести проект на TypeScript для более строгой типизации, 
+разработка функционала для поиска по всем товарам, включая динамическую подгрузку данных, 
+добавление функционала сохранения корзины и закладок для неавторизованных пользователей, 
+адаптивная верстка, 
+оптимизация, оптимизация и ещё раз оптимизация.
+# Примечания:
+Проект создан в рамках обучения и является тестовым для практики и дальнейшего усовершенствования.

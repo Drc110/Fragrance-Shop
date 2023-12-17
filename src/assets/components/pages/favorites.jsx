@@ -8,9 +8,7 @@ function Favorites() {
 
     return (
         <div className={styles.content} >
-            <div className={styles.underHeader}>
-                <h2>Мои закладки</h2>
-            </div>
+            <h2>Мои закладки</h2>
 
             {favItems.length ? (
                 <div className={styles.fragrCards}>

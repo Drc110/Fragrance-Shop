@@ -9,7 +9,8 @@ const CardItem = ({
     brand,
     title,
     price,
-    volume
+    volume,
+    description
 }) => {
     const [isActive, setActive] = useState(false)
     const [amount, setAmount] = useState(1) //mod in final version ==> isItemInCart ? isItemInCart.amount : 1
@@ -27,7 +28,7 @@ const CardItem = ({
     }
 
     const handleRadioChange = (evt) => {
-        setSelectedValue(evt.target.value);
+        setSelectedValue(evt.target.value)
     }
 
     const changeAmountEvt = (evt) => {
@@ -58,7 +59,8 @@ const CardItem = ({
             brand,
             title,
             price,
-            volume
+            volume,
+            description
         }
         dispatch(addToFav(item))
     }
@@ -117,8 +119,8 @@ const CardItem = ({
                                 <img className={styles.bigCardAdd} onClick={isItemInCart ? () => dispatch(removeFromCart(title)) : onClickAdd} src={isItemInCart ? "/addToCartGreen.svg" : "/addToCartGray.svg"} alt="" />
                             </div>
                         </div>
-                        <div className={styles.descrption}>
-
+                        <div className={styles.description}>
+                            {description}
                         </div>
                     </div>
                 </div>
